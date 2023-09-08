@@ -4,6 +4,7 @@ import json
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
+import testgit
 
 json_open = open('tokens.json', 'r')
 tokens = json.load(json_open)
@@ -20,9 +21,14 @@ def ask_who(say):
     say("can I help you?")
 
 @app.event("app_mention")  # chatbotにメンションが付けられたときのハンドラ
-def respond_to_mention(event, say):
-    message = re.sub(r'^<.*>', '', event['text'])
-    say(message[::-1]) # 文字列を逆順
+def push_to_git(event, say):
+    say('pushing to github...')
+    message = re.sub(r'^<.*>', '', event['text']) # メンションを削除
+    splited_message = message.split('\n')
+    print(splited_message)
+    testgit.push(splited_message[0] ,splited_message[1], splited_message[2])
+    say('done!')
+    
 
 @app.event("message") # ロギング
 def handle_message_events(body, logger):
