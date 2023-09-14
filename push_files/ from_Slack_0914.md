@@ -1,10 +1,10 @@
 +++
-title = "A presentation at SES2023 [SESの参加]"
-date = "2023-08-29T16:00:00+09:00"
-tags = ["conference"]
-categories = ["news","conference"]
-banner = "/img/news/2023-08-29-ses.jpg"
-authors = ["SE Lab"]
+title = "We attend conference !"
+date = "2023-09-14 12:18:54.695268"
+tags = ['general']
+categories = ['others']
+banner = ""
+authors = ['']
 +++
 
 Supatsara Wattanakriengkrai, Koki Okai, and Atsuhito Yamaoka attended at the software engineering symposium (SES), a symposium on software. Supatsara Wattanakriengkrai received two SIGSE Distinguished Research Award.
