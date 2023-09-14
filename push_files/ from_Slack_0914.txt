@@ -1,2 +1,0 @@
-title = "We attend conference !"
-member = "Masui, Tanaka"
