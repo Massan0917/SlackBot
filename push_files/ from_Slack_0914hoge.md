@@ -1,6 +1,6 @@
-text = +++
-    title = "A presentation at SES2023 [SESの参加]"
-    date = "2023-08-29T16:00:00+09:00"
++++
+title = "A presentation at SES2023 [SESの参加]"
+date = "2023-08-29T16:00:00+09:00"
     tags = ["conference"]
     categories = ["news","conference"]
     banner = "/img/news/2023-08-29-ses.jpg"
