@@ -4,7 +4,7 @@ import json
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
-import testgit
+import testgit as ptg
 
 json_open = open('tokens.json', 'r')
 tokens = json.load(json_open)
@@ -26,9 +26,9 @@ def push_to_git(event, say):
     message = re.sub(r'^<.*>', '', event['text']) # メンションを削除
     splited_message = message.split('\n')
     print(splited_message)
-    testgit.push(splited_message[0] ,splited_message[1], splited_message[2])
+    ptg.push(splited_message[0] ,splited_message[1])
     say('done!')
-    
+    say('pushed at https://github.com/Massan0917/SlackBot')
 
 @app.event("message") # ロギング
 def handle_message_events(body, logger):
