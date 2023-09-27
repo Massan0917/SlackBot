@@ -4,7 +4,7 @@ import json
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
-import testgit as ptg
+import push_to_git as ptg
 
 json_open = open('tokens.json', 'r')
 tokens = json.load(json_open)
