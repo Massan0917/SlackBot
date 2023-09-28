@@ -32,3 +32,5 @@ Confirmed to work with python 3.10.12
 ## Remarks
 - The bot will post the file to the appload github repository.
   - to check where repository the bot push, check `git remote -v` in the terminal.
+- tokens of slack is hidden in the code.
+  - to use the bot, you need to get the tokens and put them in the json file : `tokens.json`.
