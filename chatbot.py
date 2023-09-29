@@ -1,5 +1,5 @@
 # Author: Masui Taichi
-
+import os
 import json
 import requests
 from slack_bolt import App
@@ -32,13 +32,15 @@ def file_share(event, say):
     say(event['files'][0]['filetype'])
     say(event['files'][0]['name'])
 
+    repository = "interns-hugo-playground/"
+    
     # get filename
     filename = event['files'][0]['name']
     # check filetype and set path
     if event["files"][0]["filetype"] in["png", "jpg"]:
-        path='img/'
+        path='static/img/news/'
     elif event["files"][0]["filetype"] == "markdown":
-        path='news/'
+        path='content/news/'
     else:
         path=''
 
@@ -46,14 +48,15 @@ def file_share(event, say):
     download_from_slack(
         download_url = event["files"][0]["url_private_download"], 
         auth = SLACK_BOT_TOKEN,
+        repository = repository,
         path = path,
         filename = filename
     )
 
     # push to github
-    push_to_git(filepath=path + filename , say=say)
+    push_to_git(filepath=path + filename , repository=repository , say=say)
 
-def download_from_slack(download_url: str, auth: str, path:str, filename:str):
+def download_from_slack(download_url: str, auth: str, repository : str ,  path:str, filename:str):
     """
     download file from slack
 
@@ -78,11 +81,16 @@ def download_from_slack(download_url: str, auth: str, path:str, filename:str):
     ).content
 
     # save file
-    filename = path + filename
+    filename = repository + path + filename
+
+    direcotry= os.path.dirname(filename)
+    if not os.path.exists(direcotry):
+        os.makedirs(direcotry)
+
     with open(filename, "wb") as f:
         f.write(img_data)
 
-def push_to_git(filepath:str, say):
+def push_to_git(filepath:str, repository : str, say):
     """
     push file to github
 
@@ -92,13 +100,16 @@ def push_to_git(filepath:str, say):
             path to file
         say : function
             function to say
+        repository : str
+            path to repository
     """
 
     # this link is just say to user
     # repository to push depends on running environment
-    link_to_github = "https://github.com/NAIST-SE/naist-se.github.io/"
+    link_to_github = "https://github.com/NAIST-SE/interns-hugo-playground/tree/slackbot"
+    
     say('pushing to github...')
-    ptg.push(filepath=filepath)
+    ptg.push(filepath=filepath, repository_path=repository)
     say('done!')
     say(f'pushed at {link_to_github}')
 
